@@ -1,14 +1,7 @@
-#!/bin/bash
+./test-oah-install.sh
 
-# Global variables
-#OAH_INSTALLER_SERVICE="https://openapphack.github.io/oah-installer/"
-OAH_INSTALLER_SERVICE="https://raw.githubusercontent.com/openapphack/oah-installer/"
-#sOAH meta data service for validated OAH environments
-#OAH_ENVS_INFO_SERVICE=https://openapphack.github.io/oah-installer/envinfo/candidates.txt
+oah_output_log=../tmp/test_oah_output_log.out
 
-OAH_ENVS_INFO_SERVICE="https://raw.githubusercontent.com/openapphack/oah-installer/master/envsinfo/candidates.txt"
-#OAH_BROADCAST_SERVICE=https://openapphack.github.io/oah-installer/broadcast/broadcast.txt
-OAH_BROADCAST_SERVICE="https://raw.githubusercontent.com/openapphack/oah-installer/master/broadcast/"
-#OAH_VERSION=0.0.1a1
-OAH_VERSION="0.0.1a1"
-OAH_DIR="$HOME/.oah"
+oah setup >> $oah_output_log
+
+cat $oah_output_log

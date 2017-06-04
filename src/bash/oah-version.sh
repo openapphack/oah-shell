@@ -2,5 +2,6 @@
 
 
 function __oah_version {
-	echo "OAH SHELL ${OAH_VERSION}"
+	echo ""
+	__oah_echo_yellow "OAH ${OAH_VERSION}"
 }
