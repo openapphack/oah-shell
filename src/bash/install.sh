@@ -1,13 +1,13 @@
 #!/bin/bash
 
 OAH_VERSION=0.0.1-a1
+OAH_NAMESPACE=${OAH_NAMESPACE:=openapphack}
 OAH_ROOT=${OAH_ROOT:="$HOME"}
 OAH_DIR="$OAH_ROOT/.oah"
 OAH_HOST_SERVER=${OAH_HOST_SERVER:=https://raw.githubusercontent.com}
-OAH_NAMESPACE=${OAH_NAMESPACE:=openapphack}
 
 # Global variables
-OAH_INSTALLER_SERVICE=${OAH_INSTALLER_SERVICE:="https://raw.githubusercontent.com/openapphack/oah-installer/"}
+OAH_INSTALLER_SERVICE=${OAH_INSTALLER_SERVICE:="https://raw.githubusercontent.com/${OAH_NAMESPACE}/oah-installer/"}
 
 #OAH meta data service for validated OAH environments
 
