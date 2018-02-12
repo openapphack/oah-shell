@@ -1,18 +1,18 @@
 #!/bin/bash
 
+OAH_VERSION=0.0.1-a1
+OAH_ROOT=${OAH_ROOT:="$HOME"}
+OAH_DIR="$OAH_ROOT/.oah"
+OAH_HOST_SERVER=${OAH_HOST_SERVER:=https://raw.githubusercontent.com}
+OAH_NAMESPACE=${OAH_NAMESPACE:=openapphack}
+
 # Global variables
-OAH_INSTALLER_SERVICE="https://raw.githubusercontent.com/openapphack/oah-installer/"
-#OAH_INSTALLER_SERVICE="@OAH_INSTALLER_SERVICE@"
+OAH_INSTALLER_SERVICE=${OAH_INSTALLER_SERVICE:="https://raw.githubusercontent.com/openapphack/oah-installer/"}
+
 #OAH meta data service for validated OAH environments
 
-OAH_ENVS_INFO_SERVICE="https://raw.githubusercontent.com/openapphack/oah-installer/master/envsinfo/candidates.txt"
-#OAH_ENVS_INFO_SERVICE="@OAH_ENVS_INFO_SERVICE@"
-OAH_BROADCAST_SERVICE="https://raw.githubusercontent.com/openapphack/oah-installer/master/broadcast/"
-#OAH_BROADCAST_SERVICE="@OAH_BROADCAST_SERVICE@"
-OAH_VERSION=0.0.1a1
-#OAH_VERSION="@OAH_VERSION@"
-OAH_DIR="$HOME/.oah"
-
+OAH_ENVS_INFO_SERVICE="${OAH_INSTALLER_SERVICE}/master/envsinfo/candidates.txt"
+OAH_BROADCAST_SERVICE="${OAH_INSTALLER_SERVICE}/master/broadcast/"
 # Local variables
 oah_bin_folder="${OAH_DIR}/bin"
 oah_src_folder="${OAH_DIR}/src"

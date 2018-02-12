@@ -9,19 +9,19 @@ function __oah_broadcast {
 	fi
 }
 
-function oah_update_broadcast_or_force_offline {
+function __oah_update_broadcast_or_force_offline {
     BROADCAST_LIVE_ID=$(oah_infer_broadcast_id)
 
-    oah_force_offline_on_proxy "$BROADCAST_LIVE_ID"
+    __oah_force_offline_on_proxy "$BROADCAST_LIVE_ID"
     if [[ "$OAH_FORCE_OFFLINE" == 'true' ]]; then BROADCAST_LIVE_ID=""; fi
 
-    oah_display_online_availability
-    oah_determine_offline "$BROADCAST_LIVE_ID"
+    __oah_display_online_availability
+    __oah_determine_offline "$BROADCAST_LIVE_ID"
 
 	apptool_update_broadcast "$COMMAND" "$BROADCAST_LIVE_ID"
 }
 
-function oah_infer_broadcast_id {
+function __oah_infer_broadcast_id {
 	if [[ "$OAH_FORCE_OFFLINE" == "true" || ( "$COMMAND" == "offline" && "$QUALIFIER" == "enable" ) ]]; then
 		echo ""
 	else
@@ -29,7 +29,7 @@ function oah_infer_broadcast_id {
 	fi
 }
 
-function oah_display_online_availability {
+function __oah_display_online_availability {
 	if [[ -z "$BROADCAST_LIVE_ID" && "$OAH_ONLINE" == "true" && "$COMMAND" != "offline" ]]; then
 		echo "$OFFLINE_BROADCAST"
 	fi

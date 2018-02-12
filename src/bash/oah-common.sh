@@ -73,7 +73,7 @@ function __oah_default_environment_variables {
 	if [[ "${OAH_ONLINE}" == "false" || "${OAH_FORCE_OFFLINE}" == "true" ]]; then
 		OAH_AVAILABLE="false"
 	else
-	  	OAH_AVAILABLE="true"
+	  OAH_AVAILABLE="true"
 	fi
 }
 

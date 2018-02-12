@@ -1,4 +1,4 @@
-# openapphack-shell
+# oah-shell
 Sub project of OpenAppHack, shell for openapphack
 
 # Installation
