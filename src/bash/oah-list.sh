@@ -6,7 +6,7 @@
 # 	__oah_check_candidate_present "${CANDIDATE}" || return 1
 # 	__oah_build_version_csv "${CANDIDATE}"
 # 	__oah_determine_current_version "${CANDIDATE}"
-# 
+#
 # 	if [[ "${OAH_AVAILABLE}" == "false" ]]; then
 # 		__oah_offline_list
 # 	else
@@ -17,7 +17,7 @@
 # }
 
 function  __oah_list {
-  echo "Select a machine from this list :"
+  echo "Select a OAH environment from this list :"
   OAH_CANDIDATES_CSV=$(curl -s "${OAH_ENVS_INFO_SERVICE}" | grep -v ^# )
   OAH_CANDIDATES=(${OAH_CANDIDATES_CSV})
   #IFS="$OLD_IFS"

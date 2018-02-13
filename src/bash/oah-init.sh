@@ -27,8 +27,8 @@ oah_export OAH_VERSION $(cat $OAH_DIR/var/version)
 oah_export OAH_PLATFORM $(uname)
 
 echo "Debug_mode set to => $OAH_DEBUG_MODE "
-if [ "$OAH_DEBUG_MODE"="true" ]; then
-export | grep OAH
+if [ "$OAH_DEBUG_MODE"!="" ]; then
+   export | grep OAH
 fi
 
 # force zsh to behave well
