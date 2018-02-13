@@ -26,8 +26,8 @@ oah_export OAH_VERSION_SERVICE "$OAH_INSTALLER_SERVICE/VERSION"
 oah_export OAH_VERSION $(cat $OAH_DIR/var/version)
 oah_export OAH_PLATFORM $(uname)
 
-
-if [ "$OAH_DEBUG_MODE"="y" ]; then
+echo "Debug_mode set to => $OAH_DEBUG_MODE "
+if [ "$OAH_DEBUG_MODE"="true" ]; then
 export | grep OAH
 fi
 
