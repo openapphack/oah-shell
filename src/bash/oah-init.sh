@@ -1,5 +1,10 @@
 #!/bin/bash
 
+export OAH_NAMESPACE=${OAH_NAMESPACE:=openapphack}
+export OAH_ROOT=${OAH_ROOT:="$HOME"}
+export OAH_DIR="$OAH_ROOT/.oah"
+export OAH_HOST_SERVER=${OAH_HOST_SERVER:=https://raw.githubusercontent.com}
+
 function oah_export {
   oah_gobal_var=$1
   oah_gobal_val=$2
@@ -8,10 +13,6 @@ function oah_export {
   fi
 }
 
-oah_export OAH_NAMESPACE ${OAH_NAMESPACE:=openapphack}
-oah_export OAH_ROOT ${OAH_ROOT:="$HOME"}
-oah_export OAH_DIR "$OAH_ROOT/.oah"
-oah_export OAH_HOST_SERVER ${OAH_HOST_SERVER:=https://raw.githubusercontent.com}
 
 # Global variables
 oah_export OAH_INSTALLER_SERVICE "${OAH_HOST_SERVER}/${OAH_NAMESPACE}/oah-installer/master"
@@ -25,6 +26,10 @@ oah_export OAH_VERSION_SERVICE "$OAH_INSTALLER_SERVICE/VERSION"
 oah_export OAH_VERSION $(cat $OAH_DIR/var/version)
 oah_export OAH_PLATFORM $(uname)
 oah_export OAH_DIR "$HOME/.oah"
+
+if [ -n $OAH_DEBUG ]; then
+export | grep OAH
+fi
 
 # force zsh to behave well
 if [[ -n "$ZSH_VERSION" ]]; then
