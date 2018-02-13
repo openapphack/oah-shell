@@ -2,6 +2,7 @@
 
 
 function __oah_uninstall {
+	echo "Yet to be implemented!"
 	# CANDIDATE="$1"
 	# VERSION="$2"
 	# __oah_check_candidate_present "${CANDIDATE}" || return 1
