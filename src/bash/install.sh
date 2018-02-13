@@ -8,6 +8,7 @@ OAH_HOST_SERVER=${OAH_HOST_SERVER:=https://raw.githubusercontent.com}
 # Global variables
 OAH_INSTALLER_SERVICE="${OAH_HOST_SERVER}/${OAH_NAMESPACE}/oah-installer/master"
 OAH_GITHUB_URL=http://github.com/$OAH_NAMESPACE
+
 #OAH meta data service for validated OAH environments
 
 OAH_ENVS_INFO_SERVICE="${OAH_INSTALLER_SERVICE}/envsinfo/candidates.txt"
