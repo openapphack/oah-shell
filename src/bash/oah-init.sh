@@ -25,7 +25,7 @@ oah_export OAH_BROADCAST_SERVICE "${OAH_INSTALLER_SERVICE}/broadcast/"
 oah_export OAH_VERSION_SERVICE "$OAH_INSTALLER_SERVICE/VERSION"
 oah_export OAH_VERSION $(cat $OAH_DIR/var/version)
 oah_export OAH_PLATFORM $(uname)
-oah_export OAH_DIR "$HOME/.oah"
+
 
 if [ -n $OAH_DEBUG ]; then
 export | grep OAH
@@ -89,8 +89,8 @@ echo " Looking for candidates from => ${OAH_DIR}/var/candidates"
 if [[ -f "${OAH_DIR}/var/candidates" ]]; then
 	OAH_CANDIDATES_CSV=$(cat "${OAH_DIR}/var/candidates")
 else
-  echo " Fetching candidates from => ${OAH_ENVS_INFO_SERVICE}/candidates "
-	OAH_CANDIDATES_CSV=$(curl -s "${OAH_ENVS_INFO_SERVICE}/candidates")
+  echo " Fetching candidates from => ${OAH_ENVS_INFO_SERVICE} "
+	OAH_CANDIDATES_CSV=$(curl -s "${OAH_ENVS_INFO_SERVICE}")
 	echo "$OAH_CANDIDATES_CSV" > "${OAH_DIR}/var/candidates"
 fi
 
