@@ -84,9 +84,12 @@ EOF
 OFFLINE_MESSAGE="This command is not available in offline mode."
 
 # fabricate list of candidates
+echo " Looking for candidates from => ${OAH_DIR}/var/candidates"
+
 if [[ -f "${OAH_DIR}/var/candidates" ]]; then
 	OAH_CANDIDATES_CSV=$(cat "${OAH_DIR}/var/candidates")
 else
+  echo " Fetching candidates from => ${OAH_ENVS_INFO_SERVICE}/candidates "
 	OAH_CANDIDATES_CSV=$(curl -s "${OAH_ENVS_INFO_SERVICE}/candidates")
 	echo "$OAH_CANDIDATES_CSV" > "${OAH_DIR}/var/candidates"
 fi
