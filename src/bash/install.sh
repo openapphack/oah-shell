@@ -333,7 +333,7 @@ cat <<EOF > $OAH_DIR/data/inventory
 127.0.0.1              ansible_connection=local
 EOF
 
-if [ $OAH_PROFILE_UPDATE == "n" ]; then
+if [ "$OAH_PROFILE_UPDATE" == "n" ]; then
   echo Skipping profile update
 else
   echo "Attempt update of bash profiles..."
