@@ -143,16 +143,18 @@ if [ -f "${OAH_DIR}/etc/config" ]; then
 fi
 
 # Create upgrade delay token if it doesn't exist
+echo "Checking upgrade delay flag :${OAH_DIR}/data/var/delay_upgrade "
 if [[ ! -f "${OAH_DIR}/data/var/delay_upgrade" ]]; then
 	touch "${OAH_DIR}/data/var/delay_upgrade"
 fi
 
 # determine if up to date
 OAH_VERSION_TOKEN="${OAH_DIR}/data/var/version"
+echo "Checking Remote version token :${OAH_DIR}/data/var/version "
 if [[ -f "$OAH_VERSION_TOKEN" && -z "$(find "$OAH_VERSION_TOKEN" -mmin +$((60*24)))" ]]; then
     OAH_REMOTE_VERSION=$(cat "$OAH_VERSION_TOKEN")
-
 else
+    echo "Checking Remote version URL :${OAH_INSTALLER_SERVICE}/oah/version "
     OAH_REMOTE_VERSION=$(curl -s "${OAH_INSTALLER_SERVICE}/oah/version" --connect-timeout 1 --max-time 1)
     oah_force_offline_on_proxy "$OAH_REMOTE_VERSION"
     if [[ -z "$OAH_REMOTE_VERSION" || "$OAH_FORCE_OFFLINE" == 'true' ]]; then
