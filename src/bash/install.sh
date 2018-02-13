@@ -78,6 +78,7 @@ EOF
   fi
 }
 
+
 function downloadScripts() {
   echo "Download script archive..."
 
@@ -86,9 +87,11 @@ function downloadScripts() {
     #https://github.com/openapphack/oah-shell/archive/0.0.1-1.zip
     oah_version_url="$OAH_GITHUB_URL/oah-shell/archive/$ref.zip"
     oah_zip_file=$OAH_DIR/tmp/oah-$ref.zip
+    echo "Fetching $oah_version_url"
     if curl -s -f --head $oah_version_url > /dev/null 2>&1; then
       curl -s -o $oah_zip_file -L "$oah_version_url"
       archive_downloaded=y
+      echo "Got $oah_zip_file"
       break;
     fi
   done
@@ -107,7 +110,8 @@ function downloadScripts() {
   fi
   unzip -qo "${oah_zip_file}" -d "${oah_stage_folder}"
   zip_base_dir=$(unzip -l $oah_zip_file | grep '/$' | head -n 1 | awk '{ gsub("/", "", $4); print $4 }')
-
+  echo "Staging Folder => $oah_stage_folder"
+  echo "Zip Base Dir => $zip_base_dir"
   echo "Install scripts..."
   mv $oah_stage_folder/$zip_base_dir/src/bash/oah-init.sh $OAH_DIR/bin
   mv $oah_stage_folder/$zip_base_dir/src/bash/oah-* $OAH_DIR/src
@@ -306,9 +310,13 @@ echo "Download script archive..."
 #https://github.com/openapphack/oah/raw/gh-pages/
 # curl -s "${OAH_INSTALLER_SERVICE}/res/oah-cli-scripts.zip" > "${oah_zip_file}"
 
+# TODO if release not found set OAH_SRC and install from source
+
+
 if [  "$OAH_SRC" != "" ]; then
+  echo "Installing from source"
   cp $OAH_SRC/src/bash/oah-* $OAH_DIR/src
-  mv $OAH_DIR/src/ove-init.sh $OAH_DIR/bin
+  mv $OAH_DIR/src/oah-init.sh $OAH_DIR/bin
 else
   downloadScripts
 fi
