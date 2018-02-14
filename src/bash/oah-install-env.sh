@@ -2,6 +2,8 @@
 function __oah_install_env()
 {
   env_repo_name=$OPTION2
+  echo "In Env Install using Env repo =>  $OAH_GITHUB_URL/$env_repo_name.git"
+
   if [ "$env_repo_name" == "" ]; then
     echo Environment name is empty. Please specify which environment to install
     exit 1
@@ -12,7 +14,7 @@ function __oah_install_env()
     rm -rf $OAH_DIR/data/env/$CURRENT_ENV
   fi
   echo "installing the env"
-  git_url=$OAH_HOST_REPO/$OAH_REPO_NAMESPACE/$env_repo_name.git
+  git_url=$OAH_GITHUB_URL/$env_repo_name.git
   env_base=$OAH_DIR/data/.envs/$env_repo_name
   git clone $git_url $env_base
   ansible-galaxy install -r $env_base/provisioning/oah-requirements.yml -p $OAH_DIR/data/roles

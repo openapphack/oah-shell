@@ -4,7 +4,7 @@ function __oah_install_vagrant() {
   #TODO check $OPTION2 Value
   env_repo_name=$OPTION2
 
-  echo "In Vagrant Install using env repo =>  $OAH_HOST_REPO/$OAH_REPO_NAMESPACE/$env_repo_name.git"
+  echo "In Vagrant Install using env repo =>  $OAH_GITHUB_URL/$env_repo_name.git"
 
   echo " Parameters passed are => $@"
   echo "Executing env!!"
@@ -22,7 +22,7 @@ function __oah_install_vagrant() {
 
   # cleanup and clone
   rm -rf $env_base
-  git_url=$OAH_HOST_REPO/$OAH_REPO_NAMESPACE/$env_repo_name.git
+  git_url=$OAH_GITHUB_URL/$env_repo_name.git
   git clone $git_url $env_base
 
   # cleanup and update
