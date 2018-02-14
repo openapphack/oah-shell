@@ -1,23 +1,34 @@
 #!/bin/bash
 
+export OAH_NAMESPACE=${OAH_NAMESPACE:=openapphack}
+export OAH_ROOT=${OAH_ROOT:="$HOME"}
+export OAH_DIR="$OAH_ROOT/.oah"
+export OAH_HOST_SERVER=${OAH_HOST_SERVER:=https://raw.githubusercontent.com}
 
-export OAH_VERSION="@OAH_VERSION@"
-export OAH_PLATFORM=$(uname)
+function oah_export {
+  oah_gobal_var=$1
+  oah_gobal_val=$2
+  if [ -z $export_var ]; then
+    export $oah_gobal_var=$oah_gobal_val
+  fi
+}
 
-if [ -z "${OAH_INSTALLER_SERVICE}" ]; then
-    export OAH_INSTALLER_SERVICE="@OAH_INSTALLER_SERVICE@"
-fi
 
-if [ -z "${OAH_BROADCAST_SERVICE}" ]; then
-    export OAH_BROADCAST_SERVICE="@OAH_BROADCAST_SERVICE@"
-fi
+# Global variables
+oah_export OAH_INSTALLER_SERVICE "${OAH_HOST_SERVER}/${OAH_NAMESPACE}/oah-installer/master"
+oah_export OAH_GITHUB_URL http://github.com/$OAH_NAMESPACE
 
-if [ -z "${OAH_ENVS_INFO_SERVICE}" ]; then
-    export OAH_ENVS_INFO_SERVICE="@OAH_ENVS_INFO_SERVICE@"
-fi
+#OAH meta data service for validated OAH environments
 
-if [ -z "${OAH_DIR}" ]; then
-	export OAH_DIR="$HOME/.oah"
+oah_export OAH_ENVS_INFO_SERVICE "${OAH_INSTALLER_SERVICE}/envsinfo/candidates.txt"
+oah_export OAH_BROADCAST_SERVICE "${OAH_INSTALLER_SERVICE}/broadcast/"
+oah_export OAH_VERSION_SERVICE "$OAH_INSTALLER_SERVICE/VERSION"
+oah_export OAH_VERSION $(cat $OAH_DIR/var/version)
+oah_export OAH_PLATFORM $(uname)
+
+echo "Debug_mode set to => $OAH_DEBUG_MODE "
+if [ "$OAH_DEBUG_MODE"!="" ]; then
+   export | grep OAH
 fi
 
 # force zsh to behave well
@@ -73,10 +84,13 @@ EOF
 OFFLINE_MESSAGE="This command is not available in offline mode."
 
 # fabricate list of candidates
+echo " Looking for candidates from => ${OAH_DIR}/var/candidates"
+
 if [[ -f "${OAH_DIR}/var/candidates" ]]; then
 	OAH_CANDIDATES_CSV=$(cat "${OAH_DIR}/var/candidates")
 else
-	OAH_CANDIDATES_CSV=$(curl -s "${OAH_ENVS_INFO_SERVICE}/candidates")
+  echo " Fetching candidates from => ${OAH_ENVS_INFO_SERVICE} "
+	OAH_CANDIDATES_CSV=$(curl -s "${OAH_ENVS_INFO_SERVICE}")
 	echo "$OAH_CANDIDATES_CSV" > "${OAH_DIR}/var/candidates"
 fi
 
@@ -129,16 +143,18 @@ if [ -f "${OAH_DIR}/etc/config" ]; then
 fi
 
 # Create upgrade delay token if it doesn't exist
-if [[ ! -f "${OAH_DIR}/data/var/delay_upgrade" ]]; then
-	touch "${OAH_DIR}/data/var/delay_upgrade"
+echo "Checking upgrade delay flag :${OAH_DIR}/var/delay_upgrade "
+if [[ ! -f "${OAH_DIR}/var/delay_upgrade" ]]; then
+	touch "${OAH_DIR}/var/delay_upgrade"
 fi
 
 # determine if up to date
-OAH_VERSION_TOKEN="${OAH_DIR}/data/var/version"
+OAH_VERSION_TOKEN="${OAH_DIR}/var/version"
+echo "Checking Remote version token :${OAH_DIR}/var/version "
 if [[ -f "$OAH_VERSION_TOKEN" && -z "$(find "$OAH_VERSION_TOKEN" -mmin +$((60*24)))" ]]; then
     OAH_REMOTE_VERSION=$(cat "$OAH_VERSION_TOKEN")
-
 else
+    echo "Checking Remote version URL :${OAH_INSTALLER_SERVICE}/oah/version "
     OAH_REMOTE_VERSION=$(curl -s "${OAH_INSTALLER_SERVICE}/oah/version" --connect-timeout 1 --max-time 1)
     oah_force_offline_on_proxy "$OAH_REMOTE_VERSION"
     if [[ -z "$OAH_REMOTE_VERSION" || "$OAH_FORCE_OFFLINE" == 'true' ]]; then

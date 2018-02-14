@@ -3,23 +3,24 @@
 function __oah_determine_outdated_version {
     local candidate local_versions remote_default_version
     candidate="$1"
-
+     #TODO To be implemented later
+     echo " Not Yet Implemented"
     # Resolve local versions
-    local_versions="$(echo $(find "${OPENAPPHACK_DIR}/${candidate}" -maxdepth 1 -mindepth 1 -type d -exec basename '{}' \;) | sed -e "s/ /, /g" )"
-    if [ ${#local_versions} -eq 0 ]; then
-        return 1
-    fi
+      # local_versions="$(echo $(find "${OAH_DIR}/${candidate}" -maxdepth 1 -mindepth 1 -type d -exec basename '{}' \;) | sed -e "s/ /, /g" )"
+      # if [ ${#local_versions} -eq 0 ]; then
+      #     return 1
+      # fi
 
     # Resolve remote default version
-    remote_default_version="$(curl -s "${OPENAPPHACK_SERVICE}/candidates/${candidate}/default")"
-    if [ -z "$remote_default_version" ]; then
-        return 2
-    fi
+        # remote_default_version="$(curl -s "${OAH_SERVICE}/candidates/${candidate}/default")"
+        # if [ -z "$remote_default_version" ]; then
+        #     return 2
+        # fi
 
     # Check outdated or not
-    if [ ! -d "${OPENAPPHACK_DIR}/${candidate}/${remote_default_version}" ]; then
-        echo "${candidate} (${local_versions} < ${remote_default_version})"
-    fi
+      # if [ ! -d "${OAH_DIR}/${candidate}/${remote_default_version}" ]; then
+      #     echo "${candidate} (${local_versions} < ${remote_default_version})"
+      # fi
 }
 
 function __oah_outdated {
@@ -29,7 +30,7 @@ function __oah_outdated {
         candidates=$1
     else
         all=true
-        candidates=${OPENAPPHACK_CANDIDATES[@]}
+        candidates=${OAH_CANDIDATES[@]}
     fi
     installed_count=0
     outdated_count=0

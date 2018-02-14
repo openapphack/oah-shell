@@ -3,34 +3,44 @@
 
 
 function __oah_help {
-	echo ""
-	echo "Usage: oah <command> <candidate> [version]"
-	echo "       oah offline <enable|disable>"
-	echo ""
-	echo "   commands:"
-	echo "       install   or i    <candidate> [version]"
-	echo "       uninstall or rm   <candidate> <version>"
-	echo "       list      or ls   <candidate>"
-	echo "       use       or u    <candidate> [version]"
-	echo "       default   or d    <candidate> [version]"
-	echo "       current   or c    [candidate]"
-	echo "       outdated  or o    [candidate]"
-	echo "       reset     or re   [candidate]"
-	echo "       remove    or rm   [candidate]"
-	echo "       up        or up"
-  echo "       halt      or k"
-  echo "       provision or p"
-  echo "       destroy   or x"
-	echo "       version   or v"
-	echo "       broadcast or b"
-	echo "       help      or h"
-	echo "       offline           <enable|disable>"
-	echo "       selfupdate        [force]"
-	echo "       flush             <candidates|broadcast|archives|temp>"
-	echo ""
-	echo -n "   candidate  :  "
-	echo "$OAH_CANDIDATES_CSV" | sed 's/,/, /g'
-	echo "   version    :  where optional, defaults to latest stable if not provided"
-	echo ""
-	echo "eg: oah install oah-vm"
+	cat <<EOF
+Install with ove:
+Usage:  oah install [option(-v,-d,-s)] {imagename}
+ Options
+ -v vagrant // will be used for testing and creation of cluster
+
+-s standalone machine / will make use of localhost as inventory
+
+  Example : To Install Drupal8  on a Windows host with vagrant and Virtualbox:
+ oah install -v oah-drupal8-vm
+
+
+List the VMs available:
+oah list
+
+ Show the status of the  environmant through vagrant:
+oah status
+
+Show the  environments installed on the vm:
+oah show
+
+Show the  current environment installed on the vm:
+oah show  current
+
+Reset- Resets the environment back:
+oah reset - run from the guest
+
+Remove- Remove all the installed environment and make it as a base machine:
+oah remove - run from guest
+
+Destroy the guest:
+oah destroy [machine id]}
+
+Provision the vm - Run this if the ove install options fails in between:
+oah provision
+
+Halt a guest:
+oah halt
+
+EOF
 }
