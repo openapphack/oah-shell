@@ -3,7 +3,16 @@ function __oah_install_vagrant() {
 
   #TODO check $OPTION2 Value
   env_repo_name=$OPTION2
+
   echo "In Vagrant Install using env repo =>  $OAH_HOST_REPO/$OAH_REPO_NAMESPACE/$env_repo_name.git"
+
+  echo " Parameters passed are => $@"
+  echo "Executing env!!"
+  env
+
+  echo "Executing export -p"
+  export -p
+
   if [ "$env_repo_name" == "" ]; then
     echo Environment name is empty. Please specify which environment to install
     return 1
