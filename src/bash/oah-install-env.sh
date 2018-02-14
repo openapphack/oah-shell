@@ -26,6 +26,6 @@ function __oah_install_env()
     cp -r  $env_base/host           $current_env
     cp -r  $env_base/oah-config.yml $current_env
     cp -r  $env_base/provisioning   $current_env
-    cp -r  $env_base/testing        $current_env
+    cp -r  $env_base/tests          $current_env
   fi
 }
