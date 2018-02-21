@@ -2,6 +2,8 @@
 
 #
 # common internal function definitions
+# TODO fix support version specific environments installation
+# ignore version folder if missing ln the candidate folder as the current environment
 #
 
 function __oah_check_candidate_present {
