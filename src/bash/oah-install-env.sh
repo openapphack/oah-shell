@@ -43,7 +43,8 @@ function __oah_install_env()
     cp -r $env_base/tests          $current_env
     echo "Copying $env_base/oah-config.yml  => $current_env"
     cp $env_base/oah-config.yml    $current_env
-
+    echo "Making default config  => $current_env/default.oah-config.yml"
+    cp $env_base/oah-config.yml    $current_env/default.oah-config.yml
     echo "Done copying env from $env_base =>  $current_env"
   fi
 }
