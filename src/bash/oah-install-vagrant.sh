@@ -21,17 +21,28 @@ function __oah_install_vagrant() {
   current_env=$OAH_DIR/data/env/$env_repo_name
 
   # cleanup and clone
+  echo "Cloning $git_url =>  $env_base"
+
   rm -rf $env_base
   git_url=$OAH_GITHUB_URL/$env_repo_name.git
   git clone $git_url $env_base
 
   # cleanup and update
-  rm -rf $OVE_DIR/data/env/*
+  echo "Removing $OAH_DIR/data/env/*"
+
+  rm -rf $OAH_DIR/data/env/*
+  echo "Creating New Current Env => $current_env"
   mkdir $current_env
+  echo "Copying $env_base/host   => $current_env"
   cp -r $env_base/host           $current_env
+  echo "Copying $env_base/provisioning   => $current_env"
   cp -r $env_base/provisioning   $current_env
+  echo "Copying $env_base/tests   => $current_env"
   cp -r $env_base/tests          $current_env
+  echo "Copying $env_base/oah-config.yml  => $current_env"
   cp $env_base/oah-config.yml    $current_env
+
+  echo "Done copying env from $env_base =>  $current_env"
 
   # launch vm
   pushd $current_env/host/vagrant
