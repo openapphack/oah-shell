@@ -65,7 +65,7 @@ echo "python -m SimpleHttpServer 8088 "
 
 # test local candidate file
 
-echo "curl http://localhost:8088/envsinfo/candidate.txt | grep ove-vm"
+echo "curl http://localhost:8088/envsinfo/candidate.txt | grep oah-vm"
 
 # set env variable
 # OAH_ROOT =./tmp/
