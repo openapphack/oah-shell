@@ -1,6 +1,6 @@
 #!/bin/bash
 
-OAH_NAMESPACE=${OAH_NAMESPACE:=openapphack}
+OAH_NAMESPACE=${OAH_NAMESPACE:=SAURABH110894}
 OAH_ROOT=${OAH_ROOT:="$HOME"}
 OAH_DIR="$OAH_ROOT/.oah"
 OAH_HOST_SERVER=${OAH_HOST_SERVER:=https://raw.githubusercontent.com}
