@@ -83,7 +83,7 @@ function downloadScripts() {
   echo "Download script archive..."
 
   archive_downloaded=n
-  for ref in $OAH_VERSION master; do
+  for ref in master; do
     #https://github.com/openapphack/oah-shell/archive/0.0.1-1.zip
     oah_version_url="$OAH_GITHUB_URL/oah-shell/archive/$ref.zip"
     oah_zip_file=$OAH_DIR/tmp/oah-$ref.zip
